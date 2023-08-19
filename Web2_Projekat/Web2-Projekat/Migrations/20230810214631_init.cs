@@ -53,7 +53,9 @@ namespace Web2_Projekat.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ArticleId = table.Column<long>(type: "bigint", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
                     CartId = table.Column<long>(type: "bigint", nullable: false)
+                    
                 },
                 constraints: table =>
                 {
@@ -128,6 +130,8 @@ namespace Web2_Projekat.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserType = table.Column<int>(type: "int", nullable: false),
+                    VerificationStatus = table.Column<int>(type: "int", nullable: false),
                     RoleId = table.Column<long>(type: "bigint", nullable: false),
                     StatusId = table.Column<long>(type: "bigint", nullable: false)
                 },

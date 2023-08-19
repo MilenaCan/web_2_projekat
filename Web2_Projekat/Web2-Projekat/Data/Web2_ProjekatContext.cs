@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Web2_Projekat.Dto;
 using Web2_Projekat.Models;
 
 namespace Web2_Projekat.Data
@@ -14,7 +15,12 @@ namespace Web2_Projekat.Data
         {
         }
 
+        public DbSet<User> users { get; set; }
+       // public DbSet<UserDto> users { get; set; }
+
         public DbSet<Web2_Projekat.Models.User> User { get; set; } = default!;
+
+       
 
         public DbSet<Web2_Projekat.Models.Article>? Article { get; set; }
 

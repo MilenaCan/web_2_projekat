@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web2_Projekat.Data;
+using Web2_Projekat.Dto;
 using Web2_Projekat.Models;
 
 namespace Web2_Projekat.Controllers
@@ -84,7 +85,7 @@ namespace Web2_Projekat.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> CreateUser(User user)
         {
           if (_context.User == null)
           {
@@ -95,6 +96,9 @@ namespace Web2_Projekat.Controllers
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
+        
+
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]

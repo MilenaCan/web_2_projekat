@@ -220,9 +220,15 @@ namespace Web2_Projekat.Migrations
                     b.Property<long>("StatusId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VerificationStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
