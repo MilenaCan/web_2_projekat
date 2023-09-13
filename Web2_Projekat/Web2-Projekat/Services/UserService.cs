@@ -8,6 +8,7 @@ using Web2_Projekat.Data;
 using Web2_Projekat.Dto;
 using Web2_Projekat.Enumerations;
 using Web2_Projekat.Helper;
+using Web2_Projekat.HelperClasses;
 using Web2_Projekat.Interfaces;
 using Web2_Projekat.Models;
 
@@ -94,9 +95,47 @@ namespace Web2_Projekat.Services
                     return new ResponseDto("Korisnik sa datom email adresom vec postoji.");
                 }
             }
+
+            foreach (User u in _context.users)
+            {
+                if (u.Email == newUser.Email)
+                    return new ResponseDto("Email vec postoji");
+            }
+
+            if (newUser.UserType == UserType.Salesman)
+            {
+                newUser.VerificationStatus = VerificationStatus.Processing;
+            }
+
+            //if (newUser.UserType != UserType.Salesman)
+            //{
+            //    newUser.CenaDostave = 0;
+            //}
+
+            if (!UserHelper.IsUserFieldsValid(newUser)) //ako nisu validna polja onda nista
+                return new ResponseDto("Ostala polja moraju biti validna");
             UserDto registeredUser = await AddUser(newUser);
             ResponseDto response = new ResponseDto("uspjesno");
             return response;
+        }
+
+        public async Task<UserDto> UpdateUser(long id, UserDto updateUserDto)
+        {
+            User updateUser = await _context.users.FindAsync(id);
+
+            if (updateUser == null)
+            {
+                return null;
+            }
+
+            if (!UserHelper.IsUserFieldsValid(updateUserDto))
+                return null;
+
+            updateUser.Password = HashPassword.Hashpassword(updateUserDto.Password);
+            UserHelper.UpdateUserFields(updateUser, updateUserDto);
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<UserDto>(updateUser);
         }
     }
 }

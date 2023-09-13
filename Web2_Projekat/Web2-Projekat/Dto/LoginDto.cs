@@ -1,8 +1,12 @@
-﻿namespace Web2_Projekat.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Web2_Projekat.Dto
 {
     public class LoginDto
     {
-        public string Email { get; set; }
-        public string Password { get; set; }    
+        [Required, MaxLength(100)]
+        public string? Email { get; set; }
+        [Required, MaxLength(100)]
+        public string? Password { get; set; }
     }
 }

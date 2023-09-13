@@ -1,10 +1,28 @@
 ﻿namespace Web2_Projekat.Models
 {
-    public class Order
+    public class Order : BaseClass
     {
-        public long Id { get; set; }
-        public long ArticleId { get; set; }
-        OrderStatus Status { get; set; }
-        public long CartId { get; set; }
+        public List<Item>? Items { get; set; }
+        [Required, MaxLength(100)]
+        public string? DeliveryAddress { get; set; }
+        [Required]
+        public double? PositionX { get; set; }
+        [Required]
+        public double? PositionY { get; set; }
+        [Required]
+        public DateTime OrderTime { get; set; }
+        [Required]
+        public DateTime DeliveryTime { get; set; }
+        public string? Comment { get; set; }
+        [Required]
+        public double OrderPrice { get; set; }
+        [Required]
+        public bool IsCancelled { get; set; } = false;
+        [Required]
+        public int UserId { get; set; }
+        public User? User { get; set; }
+
+        [Required]
+        public bool Approved { get; set; } = false;
     }
 }

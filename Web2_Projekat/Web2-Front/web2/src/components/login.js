@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import axiosInstance from "../services/axiosConfig";
 
 const LoginPage = () => {
   const [show, setShow] = React.useState(false);
@@ -45,7 +46,7 @@ const LoginPage = () => {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       username.trim() === "" ||
       password.trim() === "" ||
@@ -57,15 +58,15 @@ const LoginPage = () => {
       return;
     }
   };
+
   return (
     <Box>
       <Box gap="1rem" display="flex" p="1rem" ml="820px">
         <Text p="0.5rem">Niste registrovani?</Text>
         <RouterLink to="/Registration">
-          <Button bg="gray.300">Registruj se</Button>
+          <Button bg="gray.300">Registruj se </Button>
         </RouterLink>
       </Box>
-
       <Box p="8rem">
         <Box p="4rem" borderRadius="12px" shadow="md" bg="gray.100">
           <Center>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web2_Projekat.Data;
 using Web2_Projekat.Dto;
+using Web2_Projekat.Interfaces;
 using Web2_Projekat.Models;
 
 namespace Web2_Projekat.Controllers
@@ -16,10 +17,12 @@ namespace Web2_Projekat.Controllers
     public class UsersController : ControllerBase
     {
         private readonly Web2_ProjekatContext _context;
+        private readonly IUserService _userService;
 
-        public UsersController(Web2_ProjekatContext context)
+        public UsersController(Web2_ProjekatContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         // GET: api/Users
@@ -54,32 +57,16 @@ namespace Web2_Projekat.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        public async Task<IActionResult> UpdateUser(long id, [FromBody] UserDto user)
         {
-            if (id != user.Id)
+            UserDto updateUser = await _userService.UpdateUser(id, user);
+            if (updateUser == null)
             {
-                return BadRequest();
+                return BadRequest("Postoje neka prazna polja(mozda korisnik ne postoji)");
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            updateUser.Password = user.Password;
+            return Ok(updateUser);
         }
 
         // POST: api/Users

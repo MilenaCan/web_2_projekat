@@ -7,5 +7,7 @@ namespace Web2_Projekat.Interfaces
         Task<ResponseDto> Registration(UserDto newUser);
 
         Task<ResponseDto> Login(LoginDto loginUserDto);
+
+        Task<UserDto> UpdateUser(long id, UserDto updateUserDto);
     }
 }
