@@ -30,5 +30,13 @@ namespace Web2_Projekat.Controllers
             await _authService.Register(registerDTO);
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpPost("google-sign-in")]
+        public async Task<IActionResult> GoogleSignIn(TokenDto token)
+        {
+            var returnToken = await _authService.GoogleSignIn(token);
+            return Ok(returnToken);
+        }
     }
 }

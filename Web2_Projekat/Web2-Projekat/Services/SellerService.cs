@@ -7,7 +7,7 @@ using Web2_Projekat.Models;
 
 namespace Web2_Projekat.Services
 {
-    public class SellerService : ISellerInterface
+    public class SellerService : ISellerService
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;

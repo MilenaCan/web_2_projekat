@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Web2_Projekat.Data;
 using Web2_Projekat.Interfaces;
 using Web2_Projekat.Services;
 using AutoMapper;
@@ -12,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Web2_Projekat.Exceptions;
 using Web2_Projekat.Interfaces.IServices;
 using Web2_Projekat.Repository;
+using Web2_Projekat.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Web2_ProjekatContext>(options =>

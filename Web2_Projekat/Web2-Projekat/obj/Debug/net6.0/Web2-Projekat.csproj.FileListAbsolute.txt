@@ -535,3 +535,15 @@ E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\BCrypt.Net-Next.d
 E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\Google.Apis.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\Google.Apis.Auth.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\Google.Apis.Core.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\MailKit.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\MimeKit.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\System.Formats.Asn1.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+E:\web_2_projekat\Web2_Projekat\Web2-Projekat\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

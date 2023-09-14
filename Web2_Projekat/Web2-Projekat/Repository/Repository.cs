@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Web2_Projekat.Data;
 using Web2_Projekat.Interfaces;
 using Web2_Projekat.Models;
+using Web2_Projekat.Settings;
 
 namespace Web2_Projekat.Repository
 {

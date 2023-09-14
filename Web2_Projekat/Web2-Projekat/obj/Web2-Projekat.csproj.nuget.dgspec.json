@@ -58,10 +58,6 @@
               "target": "Package",
               "version": "[1.62.0, )"
             },
-            "Google.Apis.Auth.AspNetCore": {
-              "target": "Package",
-              "version": "[1.62.0, )"
-            },
             "MailKit": {
               "target": "Package",
               "version": "[4.2.0, )"
@@ -97,6 +93,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

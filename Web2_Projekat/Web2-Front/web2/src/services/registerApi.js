@@ -1,19 +1,43 @@
 import axiosInstance from "./axiosConfig";
+import { UserModel } from "../models/models";
 
-export const registration = async (data) => {
+const register = async (data) => {
   try {
-    console.log(data);
-    const res = await axiosInstance.post(
-      "/api/Registration/registration",
-      data,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    console.log(res.data);
-    return res.data;
-  } catch (cerror) {
-    alert("Nesto se desilo prilikom registracije");
+    await axiosInstance.post("auth/register", data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return true;
+  } catch (e) {
+    alert(e.response.data.Exception);
+    return false;
+  }
+};
+
+const getUser = async () => {
+  try {
+    const res = await axiosInstance.get("profile");
+    return res.data ? new UserModel(res.data) : null;
+  } catch (e) {
+    alert(e.response.data.Exception);
     return null;
   }
+};
+
+const setUser = async (data) => {
+  try {
+    await axiosInstance.put("profile", data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return true;
+  } catch (e) {
+    alert(e.response.data.Exception);
+    return false;
+  }
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  register,
+  getUser,
+  setUser,
 };

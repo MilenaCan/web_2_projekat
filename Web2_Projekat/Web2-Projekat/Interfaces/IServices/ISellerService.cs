@@ -2,7 +2,7 @@
 
 namespace Web2_Projekat.Interfaces.IServices
 {
-    public interface ISellerInterface
+    public interface ISellerService
     {
         public Task<List<ProductDto>> GetProducts(int userId);
         public Task<ProductDto> GetProduct(int id, int userId);
