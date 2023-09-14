@@ -1,4 +1,6 @@
-﻿namespace Web2_Projekat.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Web2_Projekat.Models
 {
     public class Order : BaseClass
     {

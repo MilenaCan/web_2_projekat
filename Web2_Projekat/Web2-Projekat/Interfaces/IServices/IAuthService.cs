@@ -6,5 +6,7 @@ namespace Web2_Projekat.Interfaces.IServices
     {
         public Task<string> Login(LoginDto loginDTO);
         public Task Register(RegisterDto registerDTO);
+
+        public Task<string> GoogleSignIn(TokenDto token);
     }
 }

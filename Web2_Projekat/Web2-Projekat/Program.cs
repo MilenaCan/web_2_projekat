@@ -9,6 +9,9 @@ using AutoMapper;
 using Web2_Projekat.Mapping;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Web2_Projekat.Exceptions;
+using Web2_Projekat.Interfaces.IServices;
+using Web2_Projekat.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Web2_ProjekatContext>(options =>
@@ -18,33 +21,7 @@ builder.Services.AddDbContext<Web2_ProjekatContext>(options =>
 
 // Add services to the container.
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
-{
-    o.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey
-        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true
-    };
-}).AddGoogle(o =>
-{
-    o.ClientId = builder.Configuration["Google:ClientID"];
-    o.ClientSecret = builder.Configuration["Google:ClientSecret"];
-});
-
 builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -81,7 +58,19 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<DbContext, Web2_ProjekatContext>();
+builder.Services.AddScoped<ExceptionMiddleware>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+//builder.Services.AddScoped<IProfileService, ProfileService>();
+//builder.Services.AddScoped<IAdministrationService, AdministrationService>();
+//builder.Services.AddScoped<IBuyerService, BuyerService>();
+//builder.Services.AddScoped<ISellerService, SellerService>();
+//builder.Services.AddScoped<IMailService, MailService>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("All", p =>
@@ -89,63 +78,51 @@ builder.Services.AddCors(o =>
         p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-//Dodavanje mapera
-var mappingConfig = new MapperConfiguration(mc =>
+builder.Services.AddAuthentication(options =>
 {
-    mc.AddProfile(new MappingProfile());
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+}).AddGoogle(o =>
+{
+    o.ClientId = builder.Configuration["Google:ClientID"];
+    o.ClientSecret = builder.Configuration["Google:ClientSecret"];
 });
 
-IMapper mapper = mappingConfig.CreateMapper();
-builder.Services.AddSingleton(mapper);
-
-
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors("All");
 
-
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(o =>
-//{
-//    o.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//        ValidAudience = builder.Configuration["Jwt:Audience"],
-//        IssuerSigningKey = new SymmetricSecurityKey
-//        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-//        ValidateIssuer = true,
-//        ValidateAudience = true,
-//        ValidateLifetime = true,
-//        ValidateIssuerSigningKey = true
-//    };
-//});
-builder.Services.AddAuthorization();
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-
-app.UseRouting();
 app.UseAuthentication();
-app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseAuthorization();
 
 app.MapControllers();
 
-    app.Run();
+app.Run();

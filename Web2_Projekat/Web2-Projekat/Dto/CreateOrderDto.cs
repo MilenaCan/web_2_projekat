@@ -11,6 +11,6 @@ namespace Web2_Projekat.Dto
         [Required]
         public double? PositionY { get; set; }
         public string? Comment { get; set; }
-        public List<CreateItemDTO>? Items { get; set; }
+        public List<CreateItemDto>? Items { get; set; }
     }
 }
