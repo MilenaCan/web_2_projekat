@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using Google.Apis.Auth;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Web2_Projekat.Dto;
 using Web2_Projekat.Exceptions;
 using Web2_Projekat.Interfaces;
 using Web2_Projekat.Interfaces.IServices;
 using Web2_Projekat.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Runtime;
+using System.Security.Claims;
+using System.Text;
 using BC = BCrypt.Net;
 
 namespace Web2_Projekat.Services

@@ -62,7 +62,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<DbContext, Web2_ProjekatContext>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-//builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 //builder.Services.AddScoped<IAdministrationService, AdministrationService>();
 //builder.Services.AddScoped<IBuyerService, BuyerService>();
 //builder.Services.AddScoped<ISellerService, SellerService>();

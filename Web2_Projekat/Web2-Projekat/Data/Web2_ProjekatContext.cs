@@ -22,18 +22,6 @@ namespace Web2_Projekat.Data
 
        
 
-        public DbSet<Web2_Projekat.Models.Article>? Article { get; set; }
-
-        public DbSet<Web2_Projekat.Models.Cart>? Cart { get; set; }
-
-        public DbSet<Web2_Projekat.Models.Order>? Order { get; set; }
-
-        public DbSet<Web2_Projekat.Models.OrderStatus>? OrderStatus { get; set; }
-
-        public DbSet<Web2_Projekat.Models.Role>? Role { get; set; }
-
-        public DbSet<Web2_Projekat.Models.Shop>? Shop { get; set; }
-
-        public DbSet<Web2_Projekat.Models.Status>? Status { get; set; }
+      
     }
 }

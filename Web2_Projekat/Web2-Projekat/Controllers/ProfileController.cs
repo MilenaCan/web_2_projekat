@@ -6,6 +6,8 @@ using Web2_Projekat.Interfaces.IServices;
 
 namespace Web2_Projekat.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProfileController : Controller
     {
         IProfileService _profileService;
