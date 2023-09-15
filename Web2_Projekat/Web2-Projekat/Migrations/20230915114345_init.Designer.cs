@@ -12,8 +12,8 @@ using Web2_Projekat.Settings;
 namespace Web2_Projekat.Migrations
 {
     [DbContext(typeof(Web2_ProjekatContext))]
-    [Migration("20230914212409_init2")]
-    partial class init2
+    [Migration("20230915114345_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,17 @@ namespace Web2_Projekat.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Item");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 5,
+                            Name = "Test",
+                            OrderId = 1,
+                            Price = 1.2,
+                            ProductId = 1
+                        });
                 });
 
             modelBuilder.Entity("Web2_Projekat.Models.Order", b =>
@@ -65,27 +76,34 @@ namespace Web2_Projekat.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Approved")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("DeliveryAddress")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("DeliveryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsCancelled")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<double>("OrderPrice")
                         .HasColumnType("float");
 
                     b.Property<DateTime>("OrderTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 9, 15, 13, 43, 44, 517, DateTimeKind.Local).AddTicks(2693));
 
                     b.Property<double?>("PositionX")
                         .IsRequired()
@@ -103,6 +121,21 @@ namespace Web2_Projekat.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Approved = false,
+                            DeliveryAddress = "Dr Sime Milosevica 10, Novi Sad",
+                            DeliveryTime = new DateTime(2023, 9, 15, 14, 12, 44, 517, DateTimeKind.Local).AddTicks(6339),
+                            IsCancelled = false,
+                            OrderPrice = 9.5,
+                            OrderTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionX = 45.245005556420359,
+                            PositionY = 19.850283596223083,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("Web2_Projekat.Models.Product", b =>
@@ -140,6 +173,17 @@ namespace Web2_Projekat.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 10,
+                            Description = "123",
+                            Name = "Grapes",
+                            Price = 1.2,
+                            SellerId = 2
+                        });
                 });
 
             modelBuilder.Entity("Web2_Projekat.Models.User", b =>
@@ -207,7 +251,7 @@ namespace Web2_Projekat.Migrations
                             Birthday = new DateTime(1978, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@milena.com",
                             FullName = "Admin Admin",
-                            Password = "$2a$11$I7EFa9rc6rnz21NJqCQPWuETqhp.LGwwXZIUwqE5ypEvr3HewGdpm",
+                            Password = "$2a$11$CgUzLy4SiISDEirYnzoqJ.XZ5Hp35UwgYIetb6.cWaG1lwE9admDi",
                             Type = "Administrator",
                             Username = "admin",
                             VerificationStatus = "Waiting"
@@ -219,7 +263,7 @@ namespace Web2_Projekat.Migrations
                             Birthday = new DateTime(1978, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "milenaacancar@gmail.com",
                             FullName = "Seller Seller",
-                            Password = "$2a$11$WLEfVIxFe0H1ipdUH/rieOc.qSZiMRNJeSIjzzcgdpr8LaMYWRkBS",
+                            Password = "$2a$11$vR71ebnzv0MMSwGcPJzf0u1YjwbvU5j5p/As0hqIftXUweklK/Xwy",
                             Type = "Seller",
                             Username = "seller",
                             VerificationStatus = "Accepted"
@@ -231,7 +275,7 @@ namespace Web2_Projekat.Migrations
                             Birthday = new DateTime(1978, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "buyer@milena.com",
                             FullName = "Buyer Buyer",
-                            Password = "$2a$11$gyFn4KmdNZLjFctxTtdMKOXqN31TOfXmXvB7Jn82uQJthUSKsmzMi",
+                            Password = "$2a$11$5vCb/HDdyZ8sAeCbirNFmebpSV6VZLCii/JL5tI837uH.h/QmyItG",
                             Type = "Buyer",
                             Username = "buyer",
                             VerificationStatus = "Waiting"

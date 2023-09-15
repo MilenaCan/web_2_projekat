@@ -71,6 +71,7 @@ namespace Web2_Projekat.Services
             }
 
             return GetToken(user);
+            
         }
 
         public async Task Register(RegisterDto registerDTO)
