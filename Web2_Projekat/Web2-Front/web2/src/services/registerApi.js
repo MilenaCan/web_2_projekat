@@ -16,7 +16,7 @@ const register = async (data) => {
 
 const getUser = async () => {
   try {
-    const res = await axiosInstance.get("profile");
+    const res = await axiosInstance.get("api/profile");
     return res.data ? new UserModel(res.data) : null;
   } catch (e) {
     alert(e.response.data.Exception);
@@ -26,7 +26,7 @@ const getUser = async () => {
 
 const setUser = async (data) => {
   try {
-    await axiosInstance.put("profile", data, {
+    await axiosInstance.put("api/profile", data, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return true;

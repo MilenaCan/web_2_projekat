@@ -12,9 +12,22 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    //Add condition that have to be fulfilled in order to proceed with a request
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      }
 
-    return config;
+      return config;
+    } catch (e) {
+      return Promise.reject(e);
+    }
   },
   (error) => {
     Promise.reject(error);

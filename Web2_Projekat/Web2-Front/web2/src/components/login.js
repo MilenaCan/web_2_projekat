@@ -6,7 +6,6 @@ import {
   Input,
   Text,
   InputGroup,
-  InputRightElement,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -51,7 +50,7 @@ const LoginPage = () => {
         <Box borderRadius="12px" shadow="md" bg="gray.100">
           <Center>
             <Box flexDir="column">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <Box p="1rem">
                   <Box p="0.2rem">
                     <Input
@@ -62,7 +61,7 @@ const LoginPage = () => {
                         setLoginForm({ ...loginForm, email: e.target.value })
                       }
                       required
-                      placeholder="Username"
+                      placeholder="Email"
                     />
                   </Box>
 
