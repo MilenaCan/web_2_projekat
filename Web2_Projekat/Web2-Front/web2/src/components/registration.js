@@ -9,9 +9,8 @@ import {
   Image,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import registerApi, { registration } from "../services/registerApi";
+import registerApi from "../services/registerApi";
 import classes from "./Regster.module.css";
 
 const Registration = () => {

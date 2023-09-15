@@ -4,18 +4,24 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Registration from "./components/registration";
 import LoginPage from "./components/login";
 import ProfilePage from "./components/profilePage";
+import { AuthContextProvider } from "./contexts/auth-context";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   return (
     <ChakraProvider>
       <React.StrictMode>
         <Router>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/Loginpage" element={<LoginPage />} />
-            <Route path="/ProfilePage" element={<ProfilePage />} />
-            <Route path="/Registration" element={<Registration />} />
-          </Routes>
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+            <AuthContextProvider>
+              <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/Loginpage" element={<LoginPage />} />
+                <Route path="/ProfilePage" element={<ProfilePage />} />
+                <Route path="/Registration" element={<Registration />} />
+              </Routes>
+            </AuthContextProvider>
+          </GoogleOAuthProvider>
         </Router>
       </React.StrictMode>
     </ChakraProvider>

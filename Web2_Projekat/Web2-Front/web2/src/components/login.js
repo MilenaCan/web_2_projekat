@@ -8,55 +8,32 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import axiosInstance from "../services/axiosConfig";
+import AuthContext from "../contexts/auth-context";
+import classes from "./Login.module.css";
+import { GoogleLogin } from "@react-oauth/google";
 
 const LoginPage = () => {
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
+  const context = useContext(AuthContext);
 
-  const handleUsernameInputChange = (event) => {
-    setUsername(event.target.value);
-    setIsFormValid(
-      event.target.value.trim() !== "" &&
-        password.trim() !== "" &&
-        email.trim() !== ""
-    );
-    console.log(username);
-  };
-  const handlePasswordInputChange = (event) => {
-    setPassword(event.target.value);
-    setIsFormValid(
-      event.target.value.trim() !== "" &&
-        username.trim() !== "" &&
-        email.trim() !== ""
-    );
-  };
-  const handleEmailInputChange = (event) => {
-    setEmail(event.target.value);
-    setIsFormValid(
-      event.target.value.trim() !== "" &&
-        password.trim() !== "" &&
-        username.trim() !== ""
-    );
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = async () => {
-    if (
-      username.trim() === "" ||
-      password.trim() === "" ||
-      email.trim() === ""
-    ) {
-      alert("Sva polja moraju biti popunjena!");
-      console.log("greskaaaa");
-
+    if (!loginForm.email || !loginForm.password) {
+      alert("All fields required.");
       return;
     }
+
+    await context.onLogin(loginForm);
+  };
+
+  const handleGoogleSignIn = async (e) => {
+    await context.googleLogin(e);
   };
 
   return (
@@ -67,89 +44,58 @@ const LoginPage = () => {
           <Button bg="gray.300">Registruj se </Button>
         </RouterLink>
       </Box>
-      <Box p="8rem">
-        <Box p="4rem" borderRadius="12px" shadow="md" bg="gray.100">
+      <Heading textAlign="center" color="gray.800" as="h1">
+        OnlineShop
+      </Heading>
+      <Box pl="14rem" pr="14rem" pt="2rem" pb="2rem">
+        <Box borderRadius="12px" shadow="md" bg="gray.100">
           <Center>
             <Box flexDir="column">
-              <Heading textAlign="center" color="gray.800" as="h1">
-                OnlineShop
-              </Heading>
-              <Box p="1rem">
-                <Box p="0.2rem">
-                  <Input
-                    value={username}
-                    bg="white"
-                    borderRadius="8px"
-                    borderColor="#e4e6c3"
-                    placeholder="Username"
-                    onChange={handleUsernameInputChange}
-                  />
-                </Box>
-                <Box p="0.2rem">
-                  <Input
-                    value={email}
-                    bg="white"
-                    borderRadius="8px"
-                    borderColor="#e4e6c3"
-                    placeholder="Email"
-                    onChange={handleEmailInputChange}
-                  />
-                </Box>
-                <Box p="0.2rem">
-                  <InputGroup size="md">
+              <form>
+                <Box p="1rem">
+                  <Box p="0.2rem">
                     <Input
-                      value={password}
-                      bg="white"
-                      borderRadius="8px"
-                      borderColor="#e4e6c3"
-                      placeholder="Password"
-                      onChange={handlePasswordInputChange}
-                      type={show ? "text" : "password"}
+                      type="email"
+                      id="email"
+                      value={loginForm.email}
+                      onChange={(e) =>
+                        setLoginForm({ ...loginForm, email: e.target.value })
+                      }
+                      required
+                      placeholder="Username"
                     />
-                    <InputRightElement width="4.5rem">
-                      <Button
-                        bg="gray.300"
-                        h="1.75rem"
-                        size="sm"
-                        onClick={handleClick}
-                      >
-                        {show ? "Sakrij" : "Prikaži"}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
+                  </Box>
+
+                  <Box p="0.2rem">
+                    <InputGroup size="md">
+                      <Input
+                        type="password"
+                        id="password"
+                        value={loginForm.password}
+                        onChange={(e) =>
+                          setLoginForm({
+                            ...loginForm,
+                            password: e.target.value,
+                          })
+                        }
+                        required
+                        placeholder="Password"
+                      />
+                    </InputGroup>
+                  </Box>
+                  <Box p="0.2rem">
+                    <Button type="submit" className={classes.submitButton}>
+                      Login
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
+              </form>
               <Center>
-                <Box p="0.2rem">
-                  {isFormValid ? (
-                    <RouterLink to="/ProfilePage">
-                      <Button
-                        bg="gray.300"
-                        textColor="gray.800"
-                        borderColor="#e4e6c3"
-                        borderRadius="8px"
-                        disabled={!isFormValid}
-                        onClick={handleSubmit}
-                      >
-                        {console.log(isFormValid)}
-                        Prijavi se
-                      </Button>
-                    </RouterLink>
-                  ) : (
-                    <RouterLink to="/LoginPage">
-                      <Button
-                        bg="gray.300"
-                        textColor="gray.800"
-                        borderColor="#e4e6c3"
-                        borderRadius="8px"
-                        disabled={!isFormValid}
-                        onClick={handleSubmit}
-                      >
-                        {console.log(isFormValid)}
-                        Prijavi se
-                      </Button>
-                    </RouterLink>
-                  )}
+                <Box pb="2rem">
+                  <GoogleLogin
+                    onSuccess={handleGoogleSignIn}
+                    onError={(e) => alert("Invalid google email.")}
+                  />
                 </Box>
               </Center>
             </Box>

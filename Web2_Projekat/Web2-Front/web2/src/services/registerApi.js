@@ -3,9 +3,10 @@ import { UserModel } from "../models/models";
 
 const register = async (data) => {
   try {
-    await axiosInstance.post("auth/register", data, {
+    await axiosInstance.post("api/auth/register", data, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    console.log(data);
     return true;
   } catch (e) {
     alert(e.response.data.Exception);
