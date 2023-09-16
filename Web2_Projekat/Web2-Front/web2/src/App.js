@@ -10,6 +10,8 @@ import UserTable from "./components/userTable";
 import WaitingTable from "./components/waitingTable";
 import Verifications from "./components/verification";
 import AllOrders from "./components/allOrders";
+import Map from "./components/map";
+import NewOrders from "./components/newOrders";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
                 <Route path="/WaitingTable" element={<WaitingTable />} />
                 <Route path="/Verifications" element={<Verifications />} />
                 <Route path="/AllOrders" element={<AllOrders />} />
+                <Route path="/Map" element={<Map />} />
+                <Route path="/NewOrders" element={<NewOrders />} />
               </Routes>
             </AuthContextProvider>
           </GoogleOAuthProvider>
