@@ -6,6 +6,9 @@ import LoginPage from "./components/login";
 import ProfilePage from "./components/profilePage";
 import { AuthContextProvider } from "./contexts/auth-context";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import UserTable from "./components/userTable";
+import WaitingTable from "./components/waitingTable";
+import Verifications from "./components/verification";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
                 <Route path="/Loginpage" element={<LoginPage />} />
                 <Route path="/ProfilePage" element={<ProfilePage />} />
                 <Route path="/Registration" element={<Registration />} />
+                <Route path="/UserTable" element={<UserTable />} />
+                <Route path="/WaitingTable" element={<WaitingTable />} />
+                <Route path="/Verifications" element={<Verifications />} />
               </Routes>
             </AuthContextProvider>
           </GoogleOAuthProvider>
