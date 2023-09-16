@@ -12,6 +12,7 @@ import Verifications from "./components/verification";
 import AllOrders from "./components/allOrders";
 import Map from "./components/map";
 import NewOrders from "./components/newOrders";
+import MyOrders from "./components/myOrders";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/AllOrders" element={<AllOrders />} />
                 <Route path="/Map" element={<Map />} />
                 <Route path="/NewOrders" element={<NewOrders />} />
+                <Route path="/MyOrders" element={<MyOrders />} />
               </Routes>
             </AuthContextProvider>
           </GoogleOAuthProvider>
