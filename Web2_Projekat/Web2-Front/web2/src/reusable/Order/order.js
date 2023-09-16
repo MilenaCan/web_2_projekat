@@ -1,4 +1,14 @@
-import { Button, Box, Text, Divider, SimpleGrid } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Text,
+  Divider,
+  SimpleGrid,
+  Heading,
+  VStack,
+  Flex,
+  Badge,
+} from "@chakra-ui/react";
 import Item from "./item";
 import { dateTimeToString } from "../../helpers/helpers";
 import { useContext, useEffect, useState } from "react";
@@ -48,60 +58,68 @@ const Orders = ({ orders, title, updateOrders }) => {
 
   return (
     <Box>
-      <Text fontSize="2xl" fontWeight="bold">
+      <Heading as="h3" size="lg" fontWeight="bold" mb="4">
         {title}
-      </Text>
-      {orders &&
-        orders.length > 0 &&
-        orders.map((o, index) => (
-          <Box
-            key={index}
-            borderWidth="1px"
-            borderRadius="lg"
-            p="4"
-            mt="4"
-            backgroundColor="gray.700"
-            color="white"
-          >
-            {!countdowns[index] &&
-              status(o) === "In delivery" &&
-              setCountdowns({
-                ...countdowns,
-                [index]: new Date(o.deliveryTime) - new Date(),
-              })}
-            <Text>Ordered: {dateTimeToString(o.orderTime)}</Text>
-            {status(o) === "In delivery" &&
-              !context.inType("Administrator") && (
-                <Text>Time to deliver: {timeToDeliver(countdowns[index])}</Text>
+      </Heading>
+      <VStack spacing="4">
+        {orders &&
+          orders.length > 0 &&
+          orders.map((o, index) => (
+            <Box
+              key={index}
+              p="4"
+              borderRadius="lg"
+              borderWidth="1px"
+              borderColor="gray.200"
+              shadow="md"
+              bgColor="gray.100"
+            >
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontWeight="bold">
+                  Ordered: {dateTimeToString(o.orderTime)}
+                </Text>
+                <Badge
+                  colorScheme={status(o) === "In delivery" ? "blue" : "gray"}
+                >
+                  {status(o)}
+                </Badge>
+              </Flex>
+              {status(o) === "In delivery" &&
+                !context.inType("Administrator") && (
+                  <Text mt="2">
+                    Time to deliver: {timeToDeliver(countdowns[index])}
+                  </Text>
+                )}
+              <Text mt="2">Address: {o.deliveryAddress}</Text>
+              <Text fontWeight="bold" color="blue.600" mt="2">
+                Items:
+              </Text>
+              <SimpleGrid columns={1} gap="2">
+                {o.items.map((item, index) => (
+                  <Item key={index} item={item} />
+                ))}
+              </SimpleGrid>
+              <Divider mt="4" />
+              <Text>Comment: {o.comment}</Text>
+              <Text fontWeight="bold" mt="2">
+                Total: {o.orderPrice.toFixed(2)}$
+              </Text>
+              {context.type() === "Buyer" && canBeCancelled(o.orderTime) && (
+                <Button
+                  mt="2"
+                  colorScheme="red"
+                  onClick={(e) => {
+                    buyerApi.postCancel(o.id).then((res) => updateOrders());
+                  }}
+                >
+                  Cancel
+                </Button>
               )}
-            <Text>Address: {o.deliveryAddress}</Text>
-            <Text>Status: {status(o)}</Text>
-            <Text fontWeight="bold" color="lightblue" mt="2">
-              Items:
-            </Text>
-            <SimpleGrid columns={1} gap="1">
-              {o.items.map((item, index) => (
-                <Item key={index} item={item} />
-              ))}
-            </SimpleGrid>
-            <Divider mt="4" />
-            <Text>Comment: {o.comment}</Text>
-            <Text>Total: {o.orderPrice.toFixed(2)}$</Text>
-            {context.type() === "Buyer" && canBeCancelled(o.orderTime) && (
-              <Button
-                mt="2"
-                colorScheme="red"
-                onClick={(e) => {
-                  buyerApi.postCancel(o.id).then((res) => updateOrders());
-                }}
-              >
-                Cancel
-              </Button>
-            )}
-          </Box>
-        ))}
+            </Box>
+          ))}
+      </VStack>
       {orders.length === 0 && (
-        <Text fontSize="xl" color="blue.500">
+        <Text fontSize="xl" color="blue.500" mt="4">
           There are no orders
         </Text>
       )}
