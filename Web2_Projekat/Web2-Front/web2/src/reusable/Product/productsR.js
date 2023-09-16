@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import sellerApi from "../../services/sellerApi";
-import classes from "./ProductsR.module.css";
 import ProductUpdateForm from "./Forms/productUpdateForm";
 import ProductAddForm from "./Forms/productAddForm";
 import { convertImage } from "../../helpers/helpers";

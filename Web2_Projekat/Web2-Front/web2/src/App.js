@@ -15,6 +15,7 @@ import Map from "./components/map";
 import NewOrders from "./components/newOrders";
 import MyOrders from "./components/myOrders";
 import Products from "./components/products";
+import BuyerNewOrder from "./components/buyerNewOrder";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/NewOrders" element={<NewOrders />} />
                   <Route path="/MyOrders" element={<MyOrders />} />
                   <Route path="/Products" element={<Products />} />
+                  <Route path="/BuyerNewOrder" element={<BuyerNewOrder />} />
                 </Routes>
               </AuthContextProvider>
             </CartContextProvider>
