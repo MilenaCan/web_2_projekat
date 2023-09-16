@@ -6,7 +6,15 @@ const UserTable = ({ users }) => {
   console.log(users);
 
   return (
-    <Table variant="simple">
+    <Table
+      borderRadius="12px"
+      shadow="md"
+      bg="gray.100"
+      p="2rem"
+      variant="simple"
+      size="sm"
+      colorScheme="blue"
+    >
       <Thead>
         <Tr>
           {Object.keys(users[0]).map((key, index) => (

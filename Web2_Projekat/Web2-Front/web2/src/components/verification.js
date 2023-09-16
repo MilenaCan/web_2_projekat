@@ -3,6 +3,7 @@ import adminApi from "../services/adminApi";
 import classes from "./Verification.module.css";
 import WaitingTable from "./waitingTable";
 import UserTable from "./userTable";
+import { Box, Heading } from "@chakra-ui/react";
 
 const Verifications = () => {
   const [waitingUsers, setWaitingUsers] = useState([]);
@@ -32,7 +33,7 @@ const Verifications = () => {
   }, []);
 
   return (
-    <div>
+    <Box p="2rem">
       {waitingUsers && waitingUsers.length !== 0 && (
         <>
           <h2 className={classes.heading}>Verifications</h2>
@@ -42,23 +43,29 @@ const Verifications = () => {
       )}
       {verifiedUsers && verifiedUsers.length !== 0 && (
         <>
-          <h2 className={classes.heading}>Verified users</h2>
+          <Heading p="2rem" as="h3">
+            Verified users
+          </Heading>
           <UserTable users={verifiedUsers} />
         </>
       )}
       {declinedUsers && declinedUsers.length !== 0 && (
         <>
-          <h2 className={classes.heading}>Declined users</h2>
+          <Heading p="2rem" as="h3">
+            Declined users
+          </Heading>
           <UserTable users={declinedUsers} />
         </>
       )}
       {buyers && buyers.length !== 0 && (
         <>
-          <h2 className={classes.heading}>Buyers</h2>
+          <Heading p="2rem" as="h3">
+            Buyers
+          </Heading>
           <UserTable users={buyers} />
         </>
       )}
-    </div>
+    </Box>
   );
 };
 
