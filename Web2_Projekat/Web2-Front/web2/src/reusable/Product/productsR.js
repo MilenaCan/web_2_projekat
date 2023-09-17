@@ -1,3 +1,4 @@
+import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -7,14 +8,12 @@ import {
   Image,
   Text,
   VStack,
-  SimpleGrid,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
 import sellerApi from "../../services/sellerApi";
 import ProductUpdateForm from "./Forms/productUpdateForm";
 import ProductAddForm from "./Forms/productAddForm";
@@ -41,154 +40,168 @@ const ProductsR = ({ products, updateProducts, title }) => {
   };
 
   return (
-    <VStack spacing={6} align="center">
-      <Text fontSize="xl" color="blue">
+    <Box>
+      <Text align="center" fontSize="xl" color="gray.800">
         {title}
       </Text>
-      <SimpleGrid columns={[1, null, 2]} spacing={6}>
-        {context.inType("Seller") && (
-          <>
-            <ProductUpdateForm
+      <ProductAddForm updateProducts={updateProducts} />
+      <Box h="100vh" p="2rem" align="center">
+        <Flex gap="2rem" p="2rem" columns={[1, null, 2]} spacing={6}>
+          {context.inType("Seller") && (
+            <>
+              <ProductUpdateForm
+                isOpen={open}
+                onClose={() => setOpen(false)}
+                data={data}
+                setData={setData}
+                updateProducts={updateProducts}
+              />
+            </>
+          )}
+
+          {context.inType("Buyer") && (
+            <ConfirmDialog
               isOpen={open}
               onClose={() => setOpen(false)}
-              data={data}
-              setData={setData}
-              updateProducts={updateProducts}
+              products={products}
             />
-            <ProductAddForm updateProducts={updateProducts} />
-          </>
+          )}
+
+          {products &&
+            products.length > 0 &&
+            products.map((p, index) => (
+              <Box
+                key={index}
+                bg="gray.300"
+                color="white"
+                maxW="md"
+                borderWidth="1px"
+                borderRadius="12px"
+                overflow="hidden"
+                boxShadow="lg"
+                p={4}
+              >
+                <Center>
+                  <Image
+                    src={p.image && convertImage(p.image)}
+                    alt="Product Image"
+                    maxH="150px"
+                    objectFit="contain"
+                  />
+                </Center>
+                <VStack spacing={2} align="start">
+                  {context.inType("Seller") && (
+                    <Text color="black" fontSize="sm">
+                      ID: {p.id}
+                    </Text>
+                  )}
+                  {context.inType("Buyer") && (
+                    <Text color="black" fontSize="sm">
+                      Prodavac: {p.seller.fullName}
+                    </Text>
+                  )}
+                  <Text color="black" fontSize="sm">
+                    Naziv: {p.name}
+                  </Text>
+                  <Text color="black" fontSize="sm">
+                    Cijena: {p.price}$
+                  </Text>
+                  <Text color="black" fontSize="sm">
+                    Količina: {p.amount}
+                  </Text>
+                  <Text color="black" fontSize="sm">
+                    Opis: {p.description}
+                  </Text>
+                </VStack>
+                <Flex pt="1rem" justify="space-between">
+                  {context.inType("Seller") && (
+                    <>
+                      <Button
+                        size="sm"
+                        fontWeight="bold"
+                        colorScheme="green"
+                        onClick={() => {
+                          setData({ ...p, imageFile: "" });
+                          setOpen(true);
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        fontWeight="bold"
+                        colorScheme="red"
+                        onClick={() =>
+                          sellerApi
+                            .deleteProduct(p.id)
+                            .then((res) => res && updateProducts())
+                        }
+                      >
+                        Delete
+                      </Button>
+                    </>
+                  )}
+
+                  {context.inType("Buyer") && (
+                    <Grid templateColumns="repeat(3, 1fr)" alignItems="center">
+                      <Button
+                        size="sm"
+                        variant="solid"
+                        colorScheme="blue"
+                        onClick={() =>
+                          changeValue(p.id, cart[p.id] - 1, p.amount)
+                        }
+                      >
+                        -
+                      </Button>
+                      <NumberInput
+                        value={cart[p.id]}
+                        onChange={(value) => changeValue(p.id, value, p.amount)}
+                        min={0}
+                        max={p.amount}
+                      >
+                        <NumberInputField />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                        </NumberInputStepper>
+                      </NumberInput>
+                      <Button
+                        size="sm"
+                        variant="solid"
+                        colorScheme="blue"
+                        onClick={() =>
+                          changeValue(p.id, cart[p.id] + 1, p.amount)
+                        }
+                      >
+                        +
+                      </Button>
+                    </Grid>
+                  )}
+                </Flex>
+              </Box>
+            ))}
+        </Flex>
+        {context.inType("Buyer") && cartNotEmpty() && (
+          <Button
+            pos="fixed"
+            bottom="0"
+            right="0"
+            zIndex="9999"
+            minW="50px"
+            minH="50px"
+            maxW="50px"
+            maxH="50px"
+            mr="50px"
+            mb="50px"
+            colorScheme="green"
+            onClick={() => setOpen(true)}
+          >
+            Buy
+          </Button>
         )}
-
-        {context.inType("Buyer") && (
-          <ConfirmDialog
-            isOpen={open}
-            onClose={() => setOpen(false)}
-            products={products}
-          />
-        )}
-
-        {products &&
-          products.length > 0 &&
-          products.map((p, index) => (
-            <Box
-              key={index}
-              bg="#0c1215"
-              color="white"
-              maxW="md"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              boxShadow="lg"
-              p={4}
-            >
-              <Center>
-                <Image
-                  src={p.image && convertImage(p.image)}
-                  alt="Product Image"
-                  maxH="150px"
-                  objectFit="contain"
-                />
-              </Center>
-              <VStack spacing={2} align="start">
-                {context.inType("Seller") && (
-                  <Text fontSize="sm">Product ID: {p.id}</Text>
-                )}
-                {context.inType("Buyer") && (
-                  <Text fontSize="sm">Seller: {p.seller.fullName}</Text>
-                )}
-                <Text fontSize="sm">Name: {p.name}</Text>
-                <Text fontSize="sm">Price: {p.price}$</Text>
-                <Text fontSize="sm">Amount: {p.amount}</Text>
-                <Text fontSize="sm">Description: {p.description}</Text>
-              </VStack>
-              <Flex justify="space-between">
-                {context.inType("Seller") && (
-                  <>
-                    <Button
-                      size="sm"
-                      fontWeight="bold"
-                      colorScheme="green"
-                      onClick={() => {
-                        setData({ ...p, imageFile: "" });
-                        setOpen(true);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      size="sm"
-                      fontWeight="bold"
-                      colorScheme="red"
-                      onClick={() =>
-                        sellerApi
-                          .deleteProduct(p.id)
-                          .then((res) => res && updateProducts())
-                      }
-                    >
-                      Delete
-                    </Button>
-                  </>
-                )}
-
-                {context.inType("Buyer") && (
-                  <Grid templateColumns="repeat(3, 1fr)" alignItems="center">
-                    <Button
-                      size="sm"
-                      variant="solid"
-                      colorScheme="blue"
-                      onClick={() =>
-                        changeValue(p.id, cart[p.id] - 1, p.amount)
-                      }
-                    >
-                      -
-                    </Button>
-                    <NumberInput
-                      value={cart[p.id]}
-                      onChange={(value) => changeValue(p.id, value, p.amount)}
-                      min={0}
-                      max={p.amount}
-                    >
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                    <Button
-                      size="sm"
-                      variant="solid"
-                      colorScheme="blue"
-                      onClick={() =>
-                        changeValue(p.id, cart[p.id] + 1, p.amount)
-                      }
-                    >
-                      +
-                    </Button>
-                  </Grid>
-                )}
-              </Flex>
-            </Box>
-          ))}
-      </SimpleGrid>
-      {context.inType("Buyer") && cartNotEmpty() && (
-        <Button
-          pos="fixed"
-          bottom="0"
-          right="0"
-          zIndex="9999"
-          minW="50px"
-          minH="50px"
-          maxW="50px"
-          maxH="50px"
-          mr="50px"
-          mb="50px"
-          colorScheme="green"
-          onClick={() => setOpen(true)}
-        >
-          Buy
-        </Button>
-      )}
-    </VStack>
+      </Box>
+    </Box>
   );
 };
 

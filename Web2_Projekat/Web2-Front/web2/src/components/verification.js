@@ -3,7 +3,8 @@ import adminApi from "../services/adminApi";
 import classes from "./Verification.module.css";
 import WaitingTable from "./waitingTable";
 import UserTable from "./userTable";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
+import Dashboard from "./dashboard";
 
 const Verifications = () => {
   const [waitingUsers, setWaitingUsers] = useState([]);
@@ -33,39 +34,43 @@ const Verifications = () => {
   }, []);
 
   return (
-    <Box p="2rem">
-      {waitingUsers && waitingUsers.length !== 0 && (
-        <>
-          <h2 className={classes.heading}>Verifications</h2>
-          <WaitingTable users={waitingUsers} refresh={refresh} />
-          <br />
-        </>
-      )}
-      {verifiedUsers && verifiedUsers.length !== 0 && (
-        <>
-          <Heading p="2rem" as="h3">
-            Verified users
-          </Heading>
-          <UserTable users={verifiedUsers} />
-        </>
-      )}
-      {declinedUsers && declinedUsers.length !== 0 && (
-        <>
-          <Heading p="2rem" as="h3">
-            Declined users
-          </Heading>
-          <UserTable users={declinedUsers} />
-        </>
-      )}
-      {buyers && buyers.length !== 0 && (
-        <>
-          <Heading p="2rem" as="h3">
-            Buyers
-          </Heading>
-          <UserTable users={buyers} />
-        </>
-      )}
-    </Box>
+    <Flex h="100%">
+      <Dashboard>
+        <Box p="2rem">
+          {waitingUsers && waitingUsers.length !== 0 && (
+            <>
+              <h2 className={classes.heading}>Verifications</h2>
+              <WaitingTable users={waitingUsers} refresh={refresh} />
+              <br />
+            </>
+          )}
+          {verifiedUsers && verifiedUsers.length !== 0 && (
+            <>
+              <Heading p="2rem" as="h3">
+                Verified users
+              </Heading>
+              <UserTable users={verifiedUsers} />
+            </>
+          )}
+          {declinedUsers && declinedUsers.length !== 0 && (
+            <>
+              <Heading p="2rem" as="h3">
+                Declined users
+              </Heading>
+              <UserTable users={declinedUsers} />
+            </>
+          )}
+          {buyers && buyers.length !== 0 && (
+            <>
+              <Heading p="2rem" as="h3">
+                Buyers
+              </Heading>
+              <UserTable users={buyers} />
+            </>
+          )}
+        </Box>
+      </Dashboard>
+    </Flex>
   );
 };
 

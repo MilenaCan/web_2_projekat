@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import sellerApi from "../services/sellerApi";
 import ProductsR from "../reusable/Product/productsR";
+import { Flex } from "@chakra-ui/react";
+import Dashboard from "./dashboard";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -12,11 +14,15 @@ const Products = () => {
   }, []);
 
   return (
-    <ProductsR
-      products={products}
-      updateProducts={updateProducts}
-      title={"My products"}
-    />
+    <Flex>
+      <Dashboard>
+        <ProductsR
+          products={products}
+          updateProducts={updateProducts}
+          title={"Moji proizvodi"}
+        />
+      </Dashboard>
+    </Flex>
   );
 };
 

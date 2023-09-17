@@ -7,15 +7,15 @@ const Item = ({ item }) => {
       <Box display="flex" justifyContent="space-between">
         <Box>
           <Text fontSize="14" color="darkblue">
-            Name: {item.name}
+            Naziv: {item.name}
           </Text>
         </Box>
         <Box>
           <Text fontSize="14" color="darkblue">
-            No: {item.amount}
+            Količina: {item.amount}
           </Text>
           <Text fontSize="14" color="darkblue">
-            Price: {item.price}$
+            Cijena: {item.price}$
           </Text>
         </Box>
       </Box>

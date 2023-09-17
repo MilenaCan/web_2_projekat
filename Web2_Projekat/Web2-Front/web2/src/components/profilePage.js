@@ -127,7 +127,7 @@ const ProfilePage = () => {
             <Box pl="4rem" pr="4rem" pb="4rem" pt="1rem">
               <Box bg="gray.100" borderRadius="12px" shadow="md">
                 <Center>
-                  <Box flexDir="column">
+                  <Box p="2rem" flexDir="column">
                     <Box p="0.2rem">
                       <FormControl>
                         <FormLabel>Korisnicko ime:</FormLabel>

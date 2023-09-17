@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import buyerApi from "../services/buyerApi";
 import { CartContext } from "../contexts/cart-context";
 import ProductsR from "../reusable/Product/productsR";
+import { Flex } from "@chakra-ui/react";
+import Dashboard from "./dashboard";
 
 const BuyerNewOrder = () => {
   const [products, setProducts] = useState([]);
@@ -22,11 +24,15 @@ const BuyerNewOrder = () => {
   }, []);
 
   return (
-    <ProductsR
-      products={products}
-      updateProducts={updateProducts}
-      title={"Products"}
-    />
+    <Flex>
+      <Dashboard>
+        <ProductsR
+          products={products}
+          updateProducts={updateProducts}
+          title={"Products"}
+        />
+      </Dashboard>
+    </Flex>
   );
 };
 

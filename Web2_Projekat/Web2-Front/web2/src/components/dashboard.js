@@ -116,7 +116,9 @@ const Dashboard = (props) => {
           )}
         </UnorderedList>
       </Box>
-      <Box bg="gray.100">{props.children}</Box>
+      <Box width="80%" bg="white">
+        {props.children}
+      </Box>
     </Box>
   );
 };

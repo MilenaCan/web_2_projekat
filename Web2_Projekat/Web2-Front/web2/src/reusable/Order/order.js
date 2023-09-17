@@ -8,6 +8,7 @@ import {
   VStack,
   Flex,
   Badge,
+  Center,
 } from "@chakra-ui/react";
 import Item from "./item";
 import { dateTimeToString } from "../../helpers/helpers";
@@ -58,9 +59,11 @@ const Orders = ({ orders, title, updateOrders }) => {
 
   return (
     <Box>
-      <Heading as="h3" size="lg" fontWeight="bold" mb="4">
-        {title}
-      </Heading>
+      <Center>
+        <Heading as="h3" size="lg" fontWeight="bold" mb="4">
+          {title}
+        </Heading>
+      </Center>
       <VStack spacing="4">
         {orders &&
           orders.length > 0 &&
@@ -76,7 +79,7 @@ const Orders = ({ orders, title, updateOrders }) => {
             >
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontWeight="bold">
-                  Ordered: {dateTimeToString(o.orderTime)}
+                  Poručeno: {dateTimeToString(o.orderTime)}
                 </Text>
                 <Badge
                   colorScheme={status(o) === "In delivery" ? "blue" : "gray"}
@@ -90,9 +93,9 @@ const Orders = ({ orders, title, updateOrders }) => {
                     Time to deliver: {timeToDeliver(countdowns[index])}
                   </Text>
                 )}
-              <Text mt="2">Address: {o.deliveryAddress}</Text>
+              <Text mt="2">Adresa: {o.deliveryAddress}</Text>
               <Text fontWeight="bold" color="blue.600" mt="2">
-                Items:
+                Stavke:
               </Text>
               <SimpleGrid columns={1} gap="2">
                 {o.items.map((item, index) => (
@@ -100,9 +103,9 @@ const Orders = ({ orders, title, updateOrders }) => {
                 ))}
               </SimpleGrid>
               <Divider mt="4" />
-              <Text>Comment: {o.comment}</Text>
+              <Text>Komentar: {o.comment}</Text>
               <Text fontWeight="bold" mt="2">
-                Total: {o.orderPrice.toFixed(2)}$
+                Ukupno: {o.orderPrice.toFixed(2)}$
               </Text>
               {context.type() === "Buyer" && canBeCancelled(o.orderTime) && (
                 <Button
@@ -120,7 +123,7 @@ const Orders = ({ orders, title, updateOrders }) => {
       </VStack>
       {orders.length === 0 && (
         <Text fontSize="xl" color="blue.500" mt="4">
-          There are no orders
+          Nema porudžbina
         </Text>
       )}
     </Box>
