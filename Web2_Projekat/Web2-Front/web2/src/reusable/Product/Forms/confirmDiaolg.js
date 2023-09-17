@@ -83,10 +83,12 @@ const ConfirmDialog = ({ isOpen, onClose, products }) => {
 
   const handleGoToPayment = async (e) => {
     if (!data.deliveryAddress || !data.positionX || !data.positionY) {
+      console.log("***********");
+      console.log(data);
       alert("Please enter address");
       return;
     }
-    navigate("/payment");
+    navigate("/PayPal");
   };
 
   const handlePlaceChange = () => {

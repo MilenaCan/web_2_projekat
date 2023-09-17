@@ -18,13 +18,18 @@ import Products from "./components/products";
 import BuyerNewOrder from "./components/buyerNewOrder";
 import PreviousOrders from "./components/previousOrders";
 import { Payment } from "@mui/icons-material";
+import Paypal from "./components/paypal";
 
 function App() {
   return (
     <ChakraProvider>
       <React.StrictMode>
         <Router>
-          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+          <GoogleOAuthProvider
+            clientId={
+              "553762030277-g4405g2rj6kbug1bkpb2kd6fdpg5hmlh.apps.googleusercontent.com"
+            }
+          >
             <CartContextProvider>
               <AuthContextProvider>
                 <Routes>
@@ -43,6 +48,7 @@ function App() {
                   <Route path="/BuyerNewOrder" element={<BuyerNewOrder />} />
                   <Route path="/PreviousOrders" element={<PreviousOrders />} />
                   <Route path="/Payment" element={<Payment />} />
+                  <Route path="/PayPal" element={<Paypal />} />
                 </Routes>
               </AuthContextProvider>
             </CartContextProvider>
