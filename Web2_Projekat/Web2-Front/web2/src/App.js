@@ -16,6 +16,8 @@ import NewOrders from "./components/newOrders";
 import MyOrders from "./components/myOrders";
 import Products from "./components/products";
 import BuyerNewOrder from "./components/buyerNewOrder";
+import PreviousOrders from "./components/previousOrders";
+import { Payment } from "@mui/icons-material";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
                   <Route path="/MyOrders" element={<MyOrders />} />
                   <Route path="/Products" element={<Products />} />
                   <Route path="/BuyerNewOrder" element={<BuyerNewOrder />} />
+                  <Route path="/PreviousOrders" element={<PreviousOrders />} />
+                  <Route path="/Payment" element={<Payment />} />
                 </Routes>
               </AuthContextProvider>
             </CartContextProvider>
