@@ -28,18 +28,18 @@ namespace Web2_Projekat.Settings
                 Email = "admin@milena.com",
                 FullName = "Admin Admin",
                 Password = BCrypt.Net.BCrypt.HashPassword("123"),
-                Address = "Admin 123",
+                Address = "Adresa 1",
                 Type = UserType.Administrator,
                 Birthday = new DateTime(1978, 12, 11)
             },
             new User
             {
                 Id = 2,
-                Username = "seller",
+                Username = "prodavac",
                 Email = "milenaacancar@gmail.com",
-                FullName = "Seller Seller",
+                FullName = "Prodavac Prodavac",
                 Password = BCrypt.Net.BCrypt.HashPassword("123"),
-                Address = "Seller 123",
+                Address = "Adresa 2",
                 Type = UserType.Seller,
                 Birthday = new DateTime(1978, 12, 11),
                 VerificationStatus = VerificationStatus.Accepted,
@@ -47,11 +47,11 @@ namespace Web2_Projekat.Settings
             new User
             {
                 Id = 3,
-                Username = "buyer",
+                Username = "kupac",
                 Email = "buyer@milena.com",
-                FullName = "Buyer Buyer",
+                FullName = "Kupac Kupac",
                 Password = BCrypt.Net.BCrypt.HashPassword("123"),
-                Address = "Buyer 123",
+                Address = "Adresa 3",
                 Type = UserType.Buyer,
                 Birthday = new DateTime(1978, 12, 11),
             });

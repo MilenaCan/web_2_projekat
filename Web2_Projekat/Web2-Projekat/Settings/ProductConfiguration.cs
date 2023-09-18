@@ -19,7 +19,7 @@ namespace Web2_Projekat.Settings
                 builder.HasData(new Product
                 {
                     Id = 1,
-                    Name = "Grapes",
+                    Name = "Grozdje",
                     Price = 1.20,
                     Amount = 10,
                     Description = "123",
