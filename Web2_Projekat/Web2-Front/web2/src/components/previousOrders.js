@@ -13,7 +13,7 @@ const PreviousOrders = () => {
     updateOrders();
   }, []);
   return (
-    <Flex h="100vh">
+    <Flex h="100%">
       <Dashboard>
         <Orders
           orders={orders}

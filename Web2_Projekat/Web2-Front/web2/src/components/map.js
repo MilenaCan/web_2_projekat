@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import sellerApi from "../services/sellerApi";
+import "leaflet/dist/leaflet.css";
 import { dateTimeToString } from "../helpers/helpers";
 import Item from "../reusable/Order/item";
 import { Button, Text, VStack, Divider, Flex } from "@chakra-ui/react";
@@ -21,36 +22,38 @@ const Map = () => {
   };
 
   const icon = new L.Icon({
-    iconUrl: "package-icon.png",
+    iconUrl: "dostava-removebg-preview.png",
     iconSize: [50, 50],
   });
 
   useEffect(() => {
+    console.log("Orders:", orders);
     refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const status = (o) => {
     return o.isCancelled
-      ? "Cancelled"
+      ? "Otkazana"
       : !o.approved
-      ? "Waiting for approval"
+      ? "Na čekanju"
       : new Date(o.deliveryTime) > new Date()
-      ? "In delivery"
-      : "Delivered";
+      ? "Dostavlja se"
+      : "Dostavljeno";
   };
 
   return (
     <Flex h="100%">
       <Dashboard>
         <MapContainer
+          style={{ width: "95vw", height: "90vh" }}
           center={startPosition}
           zoom={13}
-          style={{ width: "100%", height: "100vh" }}
           scrollWheelZoom={true}
         >
-          <TileLayer url={process.env.REACT_APP_MAP_API} />
-
+          <TileLayer
+            url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+          />
           {orders &&
             orders.length !== 0 &&
             orders.map((o, i) => (

@@ -19,12 +19,12 @@ import buyerApi from "../../services/buyerApi";
 const Orders = ({ orders, title, updateOrders }) => {
   const status = (o) => {
     return o.isCancelled
-      ? "Cancelled"
+      ? "Otkazana"
       : !o.approved
-      ? "Waiting for approval"
+      ? "Na čekanju"
       : new Date(o.deliveryTime) > new Date()
-      ? "In delivery"
-      : "Delivered";
+      ? "Dostavlja se"
+      : "Dostavljeno";
   };
 
   const context = useContext(AuthContext);

@@ -82,7 +82,7 @@ const Dashboard = (props) => {
                     _hover={{ backgroundColor: "transparent" }}
                     bg="transparent"
                   >
-                    Proizvodi
+                    Dodavanje proizvoda
                   </Button>
                 </RouterLink>
               </ListItem>
@@ -127,7 +127,7 @@ const Dashboard = (props) => {
                     _hover={{ backgroundColor: "transparent" }}
                     bg="transparent"
                   >
-                    Nove porudžbine
+                    Nova porudžbina
                   </Button>
                 </RouterLink>
               </ListItem>

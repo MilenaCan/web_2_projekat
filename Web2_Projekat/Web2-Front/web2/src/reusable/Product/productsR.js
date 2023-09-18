@@ -44,7 +44,9 @@ const ProductsR = ({ products, updateProducts, title }) => {
       <Text align="center" fontSize="xl" color="gray.800">
         {title}
       </Text>
-      <ProductAddForm updateProducts={updateProducts} />
+      {context.inType("Seller") && (
+        <ProductAddForm updateProducts={updateProducts} />
+      )}
       <Box h="100vh" p="2rem" align="center">
         <Flex gap="2rem" p="2rem" columns={[1, null, 2]} spacing={6}>
           {context.inType("Seller") && (
@@ -80,6 +82,8 @@ const ProductsR = ({ products, updateProducts, title }) => {
                 overflow="hidden"
                 boxShadow="lg"
                 p={4}
+                display="flex"
+                flexDirection="column"
               >
                 <Center>
                   <Image

@@ -29,7 +29,7 @@ const BuyerNewOrder = () => {
         <ProductsR
           products={products}
           updateProducts={updateProducts}
-          title={"Products"}
+          title={"Proizvodi"}
         />
       </Dashboard>
     </Flex>
