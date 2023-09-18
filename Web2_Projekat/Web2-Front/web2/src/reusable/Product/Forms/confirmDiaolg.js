@@ -62,20 +62,20 @@ const ConfirmDialog = ({ isOpen, onClose, products }) => {
         {temp.map((o, index) => (
           <div key={index}>
             <div className={classes.wrap}>
-              <div className={classes.wrapLeft}>Name: {o.name}</div>
+              <div className={classes.wrapLeft}>Naziv: {o.name}</div>
               <div className={classes.wrapRight}>
-                <div>No: {o.quantity}</div>
-                <div>Price: {o.price}</div>
+                <div>Kol: {o.quantity}</div>
+                <div>Cijena: {o.price}</div>
               </div>
             </div>
             <hr />
           </div>
         ))}
         <div style={{ color: "red", fontSize: 20 }}>
-          Total: {total.toFixed(2)}${" "}
+          Ukupno: {total.toFixed(2)}${" "}
         </div>
         <div style={{ color: "red", fontSize: 20 }}>
-          Delivery: {sellers.length * 3.5}${" "}
+          Dostava: {sellers.length * 3.5}${" "}
         </div>
       </>
     );
@@ -111,7 +111,7 @@ const ConfirmDialog = ({ isOpen, onClose, products }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Confirm your order</ModalHeader>
+        <ModalHeader>Potvrdite vašu porudžbinu</ModalHeader>
         <ModalBody>
           <div>{writeItems()}</div>
           <Autocomplete
@@ -122,7 +122,7 @@ const ConfirmDialog = ({ isOpen, onClose, products }) => {
               autoFocus
               margin="dense"
               id="deliveryAddress"
-              placeholder="Address"
+              placeholder="Adresa"
               type="text"
               variant="filled"
               value={data.deliveryAddress}
@@ -133,19 +133,19 @@ const ConfirmDialog = ({ isOpen, onClose, products }) => {
             autoFocus
             margin="dense"
             id="comment"
-            placeholder="Comment (optional)"
+            placeholder="Komentar (opciono)"
             type="text"
             variant="filled"
             value={data.comment}
             onChange={handleChange}
           />
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter gap="1rem">
           <Button colorScheme="red" onClick={onClose}>
-            Cancel
+            Otkaži
           </Button>
           <Button colorScheme="green" onClick={handleGoToPayment}>
-            Go to payment
+            Idi na plaćanje
           </Button>
         </ModalFooter>
       </ModalContent>

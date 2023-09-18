@@ -22,14 +22,14 @@ namespace Web2_Projekat.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-        //private readonly IMailService _mailService;
+        private readonly IMailService _mailService;
 
-        public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration, IMapper mapper)
+        public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration, IMapper mapper, IMailService mailService)
         {
             _unitOfWork = unitOfWork;
             _configuration = configuration;
             _mapper = mapper;
-            //_mailService = mailService;
+            _mailService = mailService;
         }
 
         private string GetToken(User user)
@@ -99,8 +99,8 @@ namespace Web2_Projekat.Services
                 }
             }
 
-            //if (user.Type == UserType.Seller)
-               // await _mailService.SendEmail("Account verification", "Sorry to keep you waiting, the first available administrator will verify your account.", user.Email!);
+            if (user.Type == UserType.Seller)
+                await _mailService.SendEmail("Account verification", "Sorry to keep you waiting, the first available administrator will verify your account.", user.Email!);
             await _unitOfWork.Users.Insert(user);
             await _unitOfWork.Save();
         }

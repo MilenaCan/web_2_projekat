@@ -12,9 +12,9 @@ const MyOrders = () => {
     });
   }, []);
   return (
-    <Flex h="100vh">
+    <Flex h="100%">
       <Dashboard>
-        <Box h="100vh" flex={1}>
+        <Box h="100%" flex={1}>
           <Orders orders={orders} title={"Porudžbine"} />
         </Box>
       </Dashboard>

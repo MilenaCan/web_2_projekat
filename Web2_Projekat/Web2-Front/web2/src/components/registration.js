@@ -7,11 +7,13 @@ import {
   Select,
   Button,
   Image,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import registerApi from "../services/registerApi";
 import classes from "./Regster.module.css";
+import { Link as RouterLink } from "react-router-dom";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -40,46 +42,48 @@ const Registration = () => {
     const validationErrors = {};
 
     if (!data.username) {
-      validationErrors.username = "Username is required";
+      validationErrors.username = "Popuniti korisničko ime";
     } else if (!/^[a-zA-Z0-9]+$/.test(data.username)) {
       validationErrors.username =
-        "Username can only contain alphanumeric characters";
+        "Korisničko ime može da sadrži samo alfanumeričke znakove";
     } else if (data.username.length > 100) {
-      validationErrors.username = "Username cannot exceed 100 characters";
+      validationErrors.username =
+        "Korisničko ime ne može biti duže od 100 karatktera";
     }
 
     if (!data.password) {
-      validationErrors.password = "Password is required";
+      validationErrors.password = "Popuniti lozinku";
     } else if (data.password.length > 100) {
-      validationErrors.password = "Password cannot exceed 100 characters";
+      validationErrors.password = "Lozinka ne može biti duža od 100 karatktera";
     }
 
     if (!data.email) {
-      validationErrors.email = "Email is required";
+      validationErrors.email = "Popuniti Email";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(data.email)) {
-      validationErrors.email = "Invalid email address";
+      validationErrors.email = "Neispravna Email adresa";
     } else if (data.email.length > 100) {
-      validationErrors.email = "Email cannot exceed 100 characters";
+      validationErrors.email = "Email ne može biti duža od 100 karatktera";
     }
 
     if (!data.fullName) {
-      validationErrors.fullName = "Full Name is required";
+      validationErrors.fullName = "Popuniti Ime i Prezime";
     } else if (data.fullName.length > 100) {
-      validationErrors.fullName = "Full Name cannot exceed 100 characters";
+      validationErrors.fullName =
+        "Ime i Prezime ne može biti duža od 100 karatktera";
     }
 
     if (!data.birthday) {
-      validationErrors.birthday = "Birthday is required";
+      validationErrors.birthday = "Izaberite datum rođenja";
     }
 
     if (!data.address) {
-      validationErrors.address = "Address is required";
+      validationErrors.address = "Popuniti Adresu";
     } else if (data.address.length > 200) {
-      validationErrors.address = "Address cannot exceed 200 characters";
+      validationErrors.address = "Adresa ne može biti duža od 100 karatktera";
     }
 
     if (!data.type) {
-      validationErrors.type = "User Type is required";
+      validationErrors.type = "Izaberite tip korisnika";
     }
 
     setErrors(validationErrors);
@@ -111,7 +115,7 @@ const Registration = () => {
       <Heading p="2rem" textAlign="center" color="gray.800" as="h1">
         OnlineShop
       </Heading>
-      <Box pr="4rem" pl="4rem" pb="4rem">
+      <Box display="column" pr="4rem" pl="4rem" pb="4rem">
         <Box flexDir="column" borderRadius="12px" shadow="md" bg="white">
           <Text p="1rem" as="h2" color="gray.900" align="center">
             Registracija
@@ -128,7 +132,7 @@ const Registration = () => {
                     bg="white"
                     borderRadius="8px"
                     borderColor="#e4e6c3"
-                    placeholder="Username"
+                    placeholder="Korisničko ime"
                   />
                   {errors.username && (
                     <span className={classes.error}>{errors.username}</span>
@@ -158,7 +162,7 @@ const Registration = () => {
                     bg="white"
                     borderRadius="8px"
                     borderColor="#e4e6c3"
-                    placeholder="Password"
+                    placeholder="Lozinka"
                   />
                   {errors.password && (
                     <span className={classes.error}>{errors.password}</span>
@@ -173,7 +177,7 @@ const Registration = () => {
                     bg="white"
                     borderRadius="8px"
                     borderColor="#e4e6c3"
-                    placeholder="Name and Lastname"
+                    placeholder="Ime i Prezime"
                   />
                   {errors.fullName && (
                     <span className={classes.error}>{errors.fullName}</span>
@@ -200,7 +204,7 @@ const Registration = () => {
                       bg="white"
                       borderRadius="8px"
                       borderColor="#e4e6c3"
-                      placeholder="Address"
+                      placeholder="Adresa"
                     />
                     {errors.address && (
                       <span className={classes.error}>{errors.address}</span>
@@ -214,9 +218,9 @@ const Registration = () => {
                         borderRadius="8px"
                         borderColor="#e4e6c3"
                       >
-                        <option value="">Select a type</option>
-                        <option value="1">Seller</option>
-                        <option value="2">Buyer</option>
+                        <option value="">Tip korisnika</option>
+                        <option value="1">Prodavac</option>
+                        <option value="2">Kuapc</option>
                       </Select>
                       {errors.type && (
                         <span className={classes.error}>{errors.type}</span>
@@ -242,19 +246,33 @@ const Registration = () => {
                         }}
                       />
                     </Box>
-                    <Box p="0.2rem">
-                      <Center>
-                        <Button type="submit" className={classes.submitButton}>
-                          Registration
-                        </Button>
-                      </Center>
-                    </Box>
+                    <Center>
+                      <Box display="column" p="0.2rem">
+                        <Box>
+                          <Button
+                            type="submit"
+                            className={classes.submitButton}
+                          >
+                            Registracija
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Center>
                   </Box>
                 </Box>
               </Box>
             </form>
+            <Box></Box>
           </Center>
         </Box>
+        <Flex>
+          <Box p="1rem">Imate nalog?</Box>
+          <RouterLink to="/Loginpage">
+            <Button type="submit" className={classes.submitButton}>
+              Login
+            </Button>
+          </RouterLink>
+        </Flex>
       </Box>
     </Box>
   );

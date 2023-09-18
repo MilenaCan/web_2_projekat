@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MailKit;
 using Web2_Projekat.Dto;
 using Web2_Projekat.Exceptions;
 using Web2_Projekat.Interfaces;
@@ -11,13 +10,13 @@ namespace Web2_Projekat.Services
     public class AdministrationService : IAdministrationService
     {
         IUnitOfWork _unitOfWork;
-        //IMailService _mailService;
+        IMailService _mailService;
         IMapper _mapper;
 
-        public AdministrationService(IUnitOfWork unitOfWork, IMapper mapper)
+        public AdministrationService(IUnitOfWork unitOfWork, IMailService mailService, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            //_mailService = mailService;
+            _mailService = mailService;
             _mapper = mapper;
         }
 
@@ -64,7 +63,7 @@ namespace Web2_Projekat.Services
             _unitOfWork.Users.Update(user);
 
             string message = user.VerificationStatus == VerificationStatus.Accepted ? $"You have been verified.\r\nYou can now sell." : "Your verification has been denied.\r\nPlease contact administrators.";
-            //_ = Task.Run(async () => await _mailService.SendEmail("Verification status", message, user.Email!));
+            _ = Task.Run(async () => await _mailService.SendEmail("Verification status", message, user.Email!));
             await _unitOfWork.Save();
         }
     }

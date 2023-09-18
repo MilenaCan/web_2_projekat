@@ -1,13 +1,42 @@
-import { Box, UnorderedList, ListItem, Button } from "@chakra-ui/react";
+import { Box, UnorderedList, ListItem, Button, Flex } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import AuthContext from "../contexts/auth-context";
 import { useContext } from "react";
 
 const Dashboard = (props) => {
   const context = useContext(AuthContext);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    context.onLogout();
+  };
   return (
     <Box flex={1} display="flex">
-      <Box flex={1} bg="gray.300" flexDir="column" p="2rem">
+      <Box p="2rem" flex={1} bg="gray.300" flexDir="column">
+        <Flex gap="1rem">
+          <RouterLink to="/Registration">
+            <Button
+              _hover={{ backgroundColor: "transparent" }}
+              bg="transparent"
+            >
+              Register
+            </Button>
+          </RouterLink>
+          <RouterLink to="/Loginpage">
+            <Button
+              _hover={{ backgroundColor: "transparent" }}
+              bg="transparent"
+            >
+              Login
+            </Button>
+          </RouterLink>{" "}
+          <Button
+            onClick={handleLogout}
+            _hover={{ backgroundColor: "transparent" }}
+            bg="transparent"
+          >
+            Logout
+          </Button>
+        </Flex>
         <UnorderedList>
           <ListItem>
             <RouterLink to="/ProfilePage">
@@ -63,7 +92,7 @@ const Dashboard = (props) => {
                     _hover={{ backgroundColor: "transparent" }}
                     bg="transparent"
                   >
-                    Nove porudzbine
+                    Nove porudžbine
                   </Button>
                 </RouterLink>
               </ListItem>
@@ -73,7 +102,7 @@ const Dashboard = (props) => {
                     _hover={{ backgroundColor: "transparent" }}
                     bg="transparent"
                   >
-                    Moje porudzbine
+                    Moje porudžbine
                   </Button>
                 </RouterLink>
               </ListItem>
@@ -98,7 +127,7 @@ const Dashboard = (props) => {
                     _hover={{ backgroundColor: "transparent" }}
                     bg="transparent"
                   >
-                    Nove porudzbine
+                    Nove porudžbine
                   </Button>
                 </RouterLink>
               </ListItem>
@@ -108,7 +137,7 @@ const Dashboard = (props) => {
                     _hover={{ backgroundColor: "transparent" }}
                     bg="transparent"
                   >
-                    Prethodne porudzbine
+                    Prethodne porudžbine
                   </Button>
                 </RouterLink>
               </ListItem>

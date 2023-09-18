@@ -50,45 +50,48 @@ const ProfilePage = () => {
 
     const validationErrors = {};
     if (!data.username) {
-      validationErrors.username = "Username is required";
+      validationErrors.username = "Popuniti korisničko ime";
     } else if (!/^[a-zA-Z0-9]+$/.test(data.username)) {
       validationErrors.username =
-        "Username can only contain alphanumeric characters";
+        "Korisničko ime može da sadrži samo alfanumeričke znakove";
     } else if (data.username.length > 100) {
-      validationErrors.username = "Username cannot exceed 100 characters";
+      validationErrors.username =
+        "Korisničko ime ne može biti duže od 100 karatktera";
     }
 
     if (data.password && data.password.length > 100) {
-      validationErrors.password = "Password cannot exceed 100 characters";
+      validationErrors.password =
+        "Korisničko ime ne može biti duže od 100 karatktera";
     }
 
     if (data.newPassword && data.newPassword.length > 100) {
       validationErrors.newPassword =
-        "New Password cannot exceed 100 characters";
+        "Nova lozinka ime ne može biti duža od 100 karatktera";
     }
 
     if (!data.email) {
-      validationErrors.email = "Email is required";
+      validationErrors.email = "Popuniti Email";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(data.email)) {
-      validationErrors.email = "Invalid email address";
+      validationErrors.email = "Pogrešan email";
     } else if (data.email.length > 100) {
-      validationErrors.email = "Email cannot exceed 100 characters";
+      validationErrors.email = "Email ne može biti duže od 100 karatktera";
     }
 
     if (!data.fullName) {
-      validationErrors.fullName = "Full Name is required";
+      validationErrors.fullName = "Popuniti Ime i Prezime";
     } else if (data.fullName.length > 100) {
-      validationErrors.fullName = "Full Name cannot exceed 100 characters";
+      validationErrors.fullName =
+        "Ime i Prezime ne može biti duže od 100 karatktera";
     }
 
     if (!data.birthday) {
-      validationErrors.birthday = "Birthday is required";
+      validationErrors.birthday = "Izaberi datum rođenja";
     }
 
     if (!data.address) {
-      validationErrors.address = "Address is required";
+      validationErrors.address = "Popuniiti adresu";
     } else if (data.address.length > 100) {
-      validationErrors.address = "Address cannot exceed 100 characters";
+      validationErrors.address = "Adresa ne može biti duža od 100 karatktera";
     }
 
     setErrors(validationErrors);
@@ -115,13 +118,9 @@ const ProfilePage = () => {
         <Box flex={1} bg="white">
           <Center>
             <Box>
-              <Heading as="h1">Profil page</Heading>
+              <Heading as="h1">Profilna strana</Heading>
             </Box>
           </Center>
-
-          <Box>
-            <Button ml="60rem">Odjavi se</Button>
-          </Box>
 
           <form onSubmit={handleSubmit}>
             <Box pl="4rem" pr="4rem" pb="4rem" pt="1rem">
@@ -130,7 +129,7 @@ const ProfilePage = () => {
                   <Box p="2rem" flexDir="column">
                     <Box p="0.2rem">
                       <FormControl>
-                        <FormLabel>Korisnicko ime:</FormLabel>
+                        <FormLabel>Korisničko ime:</FormLabel>
                         <Input
                           type="text"
                           name="username"
@@ -208,7 +207,7 @@ const ProfilePage = () => {
                     </Box>
                     <Box p="0.2rem">
                       <FormControl>
-                        <FormLabel>Datum Rodjenja:</FormLabel>
+                        <FormLabel>Datum Rođenja:</FormLabel>
                         <Input
                           type="date"
                           name="birthday"
@@ -268,7 +267,7 @@ const ProfilePage = () => {
                         <Box p="0.2rem">
                           <Center>
                             <Button type="submit" bg="gray.300">
-                              Sacuvaj
+                              Sačuvaj
                             </Button>
                           </Center>
                         </Box>
