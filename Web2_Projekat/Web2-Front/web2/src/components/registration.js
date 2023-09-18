@@ -20,6 +20,7 @@ const Registration = () => {
   const [data, setData] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
     email: "",
     fullName: "",
     birthday: "",
@@ -55,6 +56,12 @@ const Registration = () => {
       validationErrors.password = "Popuniti lozinku";
     } else if (data.password.length > 100) {
       validationErrors.password = "Lozinka ne može biti duža od 100 karatktera";
+    }
+
+    if (!data.confirmPassword) {
+      validationErrors.confirmPassword = "Potvrdite lozinku";
+    } else if (data.confirmPassword !== data.password) {
+      validationErrors.confirmPassword = "Lozinke se ne poklapaju";
     }
 
     if (!data.email) {
@@ -168,6 +175,24 @@ const Registration = () => {
                     <span className={classes.error}>{errors.password}</span>
                   )}
                 </Box>
+                <Box p="0.2rem">
+                  <Input
+                    type="password"
+                    name="confirmPassword"
+                    value={data.confirmPassword}
+                    onChange={handleChange}
+                    bg="white"
+                    borderRadius="8px"
+                    borderColor="#e4e6c3"
+                    placeholder="Potvrdite lozinku"
+                  />
+                  {errors.confirmPassword && (
+                    <span className={classes.error}>
+                      {errors.confirmPassword}
+                    </span>
+                  )}
+                </Box>
+
                 <Box p="0.2rem">
                   <Input
                     type="fullName"
