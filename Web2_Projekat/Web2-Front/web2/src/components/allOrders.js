@@ -14,7 +14,7 @@ const AllOrders = () => {
   return (
     <Flex h="100%">
       <Dashboard>
-        <Orders orders={orders} title={"All orders"} />
+        <Orders orders={orders} title={"Sve Porudžbine"} />
       </Dashboard>
     </Flex>
   );

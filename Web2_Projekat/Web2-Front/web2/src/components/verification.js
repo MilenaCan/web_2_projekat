@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import adminApi from "../services/adminApi";
-import classes from "./Verification.module.css";
 import WaitingTable from "./waitingTable";
 import UserTable from "./userTable";
 import { Box, Flex, Heading } from "@chakra-ui/react";
@@ -39,7 +38,9 @@ const Verifications = () => {
         <Box p="2rem">
           {waitingUsers && waitingUsers.length !== 0 && (
             <>
-              <h2 className={classes.heading}>Verifications</h2>
+              <Heading p="2rem" as="h3">
+                Verifikacije
+              </Heading>
               <WaitingTable users={waitingUsers} refresh={refresh} />
               <br />
             </>
@@ -47,7 +48,7 @@ const Verifications = () => {
           {verifiedUsers && verifiedUsers.length !== 0 && (
             <>
               <Heading p="2rem" as="h3">
-                Verified users
+                Verifikovani korisnici
               </Heading>
               <UserTable users={verifiedUsers} />
             </>
@@ -55,7 +56,7 @@ const Verifications = () => {
           {declinedUsers && declinedUsers.length !== 0 && (
             <>
               <Heading p="2rem" as="h3">
-                Declined users
+                Odbijeni korisnici
               </Heading>
               <UserTable users={declinedUsers} />
             </>
@@ -63,7 +64,7 @@ const Verifications = () => {
           {buyers && buyers.length !== 0 && (
             <>
               <Heading p="2rem" as="h3">
-                Buyers
+                Kupci
               </Heading>
               <UserTable users={buyers} />
             </>

@@ -24,7 +24,7 @@ const BuyerNewOrder = () => {
   }, []);
 
   return (
-    <Flex>
+    <Flex h="100%">
       <Dashboard>
         <ProductsR
           products={products}

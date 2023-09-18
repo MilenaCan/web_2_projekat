@@ -124,7 +124,7 @@ const ProfilePage = () => {
 
           <form onSubmit={handleSubmit}>
             <Box pl="4rem" pr="4rem" pb="4rem" pt="1rem">
-              <Box bg="gray.100" borderRadius="12px" shadow="md">
+              <Box bg="gray.200" borderRadius="12px" shadow="md">
                 <Center>
                   <Box p="2rem" flexDir="column">
                     <Box p="0.2rem">

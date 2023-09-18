@@ -5,7 +5,6 @@ import {
   Divider,
   SimpleGrid,
   Heading,
-  VStack,
   Flex,
   Badge,
   Center,
@@ -64,7 +63,7 @@ const Orders = ({ orders, title, updateOrders }) => {
           {title}
         </Heading>
       </Center>
-      <VStack spacing="4">
+      <Box p="2rem">
         {orders &&
           orders.length > 0 &&
           orders.map((o, index) => (
@@ -90,7 +89,7 @@ const Orders = ({ orders, title, updateOrders }) => {
               {status(o) === "In delivery" &&
                 !context.inType("Administrator") && (
                   <Text mt="2">
-                    Time to deliver: {timeToDeliver(countdowns[index])}
+                    Vrijeme dostave: {timeToDeliver(countdowns[index])}
                   </Text>
                 )}
               <Text mt="2">Adresa: {o.deliveryAddress}</Text>
@@ -115,12 +114,12 @@ const Orders = ({ orders, title, updateOrders }) => {
                     buyerApi.postCancel(o.id).then((res) => updateOrders());
                   }}
                 >
-                  Cancel
+                  Otkaži
                 </Button>
               )}
             </Box>
           ))}
-      </VStack>
+      </Box>
       {orders.length === 0 && (
         <Text fontSize="xl" color="blue.500" mt="4">
           Nema porudžbina

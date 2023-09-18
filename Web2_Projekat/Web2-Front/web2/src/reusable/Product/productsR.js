@@ -129,7 +129,7 @@ const ProductsR = ({ products, updateProducts, title }) => {
                           setOpen(true);
                         }}
                       >
-                        Edit
+                        Izmjeni
                       </Button>
                       <Button
                         size="sm"
@@ -141,7 +141,7 @@ const ProductsR = ({ products, updateProducts, title }) => {
                             .then((res) => res && updateProducts())
                         }
                       >
-                        Delete
+                        Obrisi
                       </Button>
                     </>
                   )}
@@ -201,7 +201,7 @@ const ProductsR = ({ products, updateProducts, title }) => {
             colorScheme="green"
             onClick={() => setOpen(true)}
           >
-            Buy
+            Kupi
           </Button>
         )}
       </Box>

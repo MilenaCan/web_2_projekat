@@ -17,7 +17,7 @@ const PreviousOrders = () => {
       <Dashboard>
         <Orders
           orders={orders}
-          title={"My orders"}
+          title={"Moje Porudžbine"}
           updateOrders={updateOrders}
         />
       </Dashboard>

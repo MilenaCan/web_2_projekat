@@ -43,10 +43,10 @@ const Map = () => {
   };
 
   return (
-    <Flex h="100%">
+    <Flex h="100vh">
       <Dashboard>
         <MapContainer
-          style={{ width: "95vw", height: "90vh" }}
+          style={{ width: "95vw", height: "95vh" }}
           center={startPosition}
           zoom={13}
           scrollWheelZoom={true}
@@ -62,20 +62,20 @@ const Map = () => {
                   <Popup style={{ background: "black" }}>
                     <VStack align="start" spacing={2}>
                       <Text fontSize="lg">
-                        Ordered: {dateTimeToString(o.orderTime)}
+                        Poručeno: {dateTimeToString(o.orderTime)}
                       </Text>
-                      <Text fontSize="lg">Address: {o.deliveryAddress}</Text>
+                      <Text fontSize="lg">Adresa: {o.deliveryAddress}</Text>
                       <Text fontSize="lg">Status: {status(o)}</Text>
                       <Text fontWeight="bold" color="lightblue" fontSize="xl">
-                        Items:
+                        Proizvodi:
                       </Text>
                       {o.items.map((item, index) => (
                         <Item key={index} item={item} />
                       ))}
                       <Divider />
-                      <Text fontSize="lg">Comment: {o.comment}</Text>
+                      <Text fontSize="lg">Komentar: {o.comment}</Text>
                       <Text fontSize="lg">
-                        Total: {o.orderPrice.toFixed(2)}$
+                        Ukupno: {o.orderPrice.toFixed(2)}$
                       </Text>
                       {!o.approved && (
                         <>
@@ -87,7 +87,7 @@ const Map = () => {
                                 .then((res) => refresh());
                             }}
                           >
-                            Approve
+                            Odobri
                           </Button>
                         </>
                       )}

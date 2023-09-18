@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../contexts/cart-context";
 import buyerApi from "../services/buyerApi";
 import { useNavigate } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Center } from "@chakra-ui/react";
 
 const Paypal = () => {
   const { cart, setCart, data, setData } = useContext(CartContext);
@@ -52,20 +52,22 @@ const Paypal = () => {
 
   return (
     <Box h="100vh" w="100vw">
-      <Box>
-        <Button variant="contained" color="primary" onClick={handleOrder}>
-          Pay when arrives
-        </Button>
-        <PayPalScriptProvider
-          options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}
-        >
-          <PayPalButtons
-            createOrder={handlePayPal}
-            onApprove={handleApprove}
-            style={{ label: "pay" }}
-          />
-        </PayPalScriptProvider>
-      </Box>
+      <Center>
+        <Box boxSize="lg">
+          <Button variant="contained" color="primary" onClick={handleOrder}>
+            Plati pouzećem
+          </Button>
+          <PayPalScriptProvider
+            options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}
+          >
+            <PayPalButtons
+              createOrder={handlePayPal}
+              onApprove={handleApprove}
+              style={{ label: "pay" }}
+            />
+          </PayPalScriptProvider>
+        </Box>
+      </Center>
     </Box>
   );
 };

@@ -70,12 +70,12 @@ const ProductUpdateForm = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent bgColor="#0c1215">
-        <ModalHeader color="white">Edit product</ModalHeader>
+      <ModalContent bgColor="gray.300">
+        <ModalHeader color="black">Imjena Proizvoa</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl id="name" isRequired>
-            <FormLabel>Name</FormLabel>
+          <FormControl display="flex" id="name" isRequired>
+            <FormLabel>Naziv</FormLabel>
             <Input
               type="text"
               value={data.name}
@@ -84,8 +84,8 @@ const ProductUpdateForm = ({
               color="white"
             />
           </FormControl>
-          <FormControl id="price" isRequired>
-            <FormLabel>Price</FormLabel>
+          <FormControl pt="1rem" display="flex" id="price" isRequired>
+            <FormLabel>Cijena</FormLabel>
             <Input
               type="number"
               value={data.price}
@@ -96,8 +96,8 @@ const ProductUpdateForm = ({
               color="white"
             />
           </FormControl>
-          <FormControl id="amount" isRequired>
-            <FormLabel>Amount</FormLabel>
+          <FormControl display="flex" pt="1rem" id="amount" isRequired>
+            <FormLabel>Količina</FormLabel>
             <Input
               type="number"
               value={data.amount}
@@ -108,8 +108,14 @@ const ProductUpdateForm = ({
               color="white"
             />
           </FormControl>
-          <FormControl id="description" isRequired>
-            <FormLabel>Description</FormLabel>
+          <FormControl
+            display="flex"
+            pb="1rem"
+            pt="1rem"
+            id="description"
+            isRequired
+          >
+            <FormLabel>Opis</FormLabel>
             <Input
               type="text"
               value={data.description}

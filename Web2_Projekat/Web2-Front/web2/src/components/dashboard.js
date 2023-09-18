@@ -10,31 +10,24 @@ const Dashboard = (props) => {
     context.onLogout();
   };
   return (
-    <Box flex={1} display="flex">
-      <Box p="2rem" flex={1} bg="gray.300" flexDir="column">
-        <Flex gap="1rem">
+    <Box h="100vh" flex={1} display="flex">
+      <Box p="1rem" flex={1} bg="white" flexDir="column">
+        <Flex>
           <RouterLink to="/Registration">
             <Button
               _hover={{ backgroundColor: "transparent" }}
               bg="transparent"
             >
-              Register
+              Registracija
             </Button>
           </RouterLink>
-          <RouterLink to="/Loginpage">
-            <Button
-              _hover={{ backgroundColor: "transparent" }}
-              bg="transparent"
-            >
-              Login
-            </Button>
-          </RouterLink>{" "}
+
           <Button
             onClick={handleLogout}
             _hover={{ backgroundColor: "transparent" }}
             bg="transparent"
           >
-            Logout
+            Odjavi se
           </Button>
         </Flex>
         <UnorderedList>

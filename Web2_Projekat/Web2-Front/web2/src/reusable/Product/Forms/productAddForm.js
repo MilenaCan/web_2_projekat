@@ -31,17 +31,17 @@ const ProductAddForm = ({ updateProducts }) => {
   const handleSave = (e) => {
     e.preventDefault();
     if (!data.name || !data.price || !data.description || !data.amount) {
-      alert("All fields are required");
+      alert("Popunite sva polja");
       return;
     }
 
     if (!data.amount || data.amount < 0 || !parseInt(data.amount)) {
-      alert("Amount must be a positive integer.");
+      alert("Količina mora biti pozitivan broj.");
       return;
     }
 
     if (!data.price || data.price < 0 || !parseFloat(data.price)) {
-      alert("Price must be a positive number.");
+      alert("Cijena mora biti pozitivan broj.");
       return;
     }
 
@@ -75,15 +75,15 @@ const ProductAddForm = ({ updateProducts }) => {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Add product</Button>
+      <Button onClick={() => setIsOpen(true)}>Dodaj Proizvod</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bgColor="#0c1215">
-          <ModalHeader color="white">Add product</ModalHeader>
+        <ModalContent bgColor="gray.300">
+          <ModalHeader color="black">Add product</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl id="name" isRequired>
-              <FormLabel>Name</FormLabel>
+            <FormControl display="flex" id="name" isRequired>
+              <FormLabel>Naziv</FormLabel>
               <Input
                 type="text"
                 value={data.name}
@@ -92,8 +92,8 @@ const ProductAddForm = ({ updateProducts }) => {
                 color="white"
               />
             </FormControl>
-            <FormControl id="price" isRequired>
-              <FormLabel>Price</FormLabel>
+            <FormControl pt="1rem" display="flex" id="price" isRequired>
+              <FormLabel>Cijena</FormLabel>
               <Input
                 type="number"
                 value={data.price}
@@ -102,8 +102,8 @@ const ProductAddForm = ({ updateProducts }) => {
                 color="white"
               />
             </FormControl>
-            <FormControl id="amount" isRequired>
-              <FormLabel>Amount</FormLabel>
+            <FormControl pt="1rem" display="flex" id="amount" isRequired>
+              <FormLabel>Količina</FormLabel>
               <Input
                 type="number"
                 value={data.amount}
@@ -112,8 +112,8 @@ const ProductAddForm = ({ updateProducts }) => {
                 color="white"
               />
             </FormControl>
-            <FormControl id="description" isRequired>
-              <FormLabel>Description</FormLabel>
+            <FormControl pt="1rem" display="flex" id="description" isRequired>
+              <FormLabel>Opis</FormLabel>
               <Input
                 type="text"
                 value={data.description}
@@ -122,8 +122,8 @@ const ProductAddForm = ({ updateProducts }) => {
                 color="white"
               />
             </FormControl>
-            <Text color="white" fontWeight="bold" mt="4">
-              Image
+            <Text color="black" fontWeight="bold" mt="4">
+              Slika
             </Text>
             <Input
               id="imageFile"
@@ -135,12 +135,12 @@ const ProductAddForm = ({ updateProducts }) => {
               color="white"
             />
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter gap="1rem">
             <Button colorScheme="red" onClick={onClose}>
-              Cancel
+              Otkaži
             </Button>
             <Button colorScheme="green" onClick={handleSave}>
-              Save
+              Sačuvaj
             </Button>
           </ModalFooter>
         </ModalContent>

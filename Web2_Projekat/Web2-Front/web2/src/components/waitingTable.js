@@ -35,12 +35,12 @@ const WaitingTable = ({ users, refresh }) => {
             ))}
             <Td>
               <Button colorScheme="green" onClick={(e) => verify(user.id, 1)}>
-                Confirm
+                Prihvati
               </Button>
             </Td>
             <Td>
               <Button colorScheme="red" onClick={(e) => verify(user.id, 2)}>
-                Reject
+                Odbij
               </Button>
             </Td>
           </Tr>
