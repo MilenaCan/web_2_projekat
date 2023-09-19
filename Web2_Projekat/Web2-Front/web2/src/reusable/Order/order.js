@@ -18,12 +18,12 @@ import buyerApi from "../../services/buyerApi";
 const Orders = ({ orders, title, updateOrders }) => {
   const status = (o) => {
     return o.isCancelled
-      ? "Otkazana"
+      ? "otkazano"
       : !o.approved
-      ? "Na čekanju"
+      ? "na cekanju"
       : new Date(o.deliveryTime) > new Date()
-      ? "Dostavlja se"
-      : "Dostavljeno";
+      ? "dostavlja se"
+      : "dostavljeno";
   };
 
   const context = useContext(AuthContext);
@@ -76,22 +76,29 @@ const Orders = ({ orders, title, updateOrders }) => {
               shadow="md"
               bgColor="gray.100"
             >
+              {!countdowns[index] &&
+                status(o) === "dostavlja se" &&
+                setCountdowns({
+                  ...countdowns,
+                  [index]: new Date(o.deliveryTime) - new Date(),
+                })}
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontWeight="bold">
                   Poručeno: {dateTimeToString(o.orderTime)}
                 </Text>
                 <Badge
-                  colorScheme={status(o) === "In delivery" ? "blue" : "gray"}
+                  colorScheme={status(o) === "dostavlja se" ? "blue" : "gray"}
                 >
                   {status(o)}
                 </Badge>
               </Flex>
-              {status(o) === "In delivery" &&
+              {status(o) === "dostavlja se" &&
                 !context.inType("Administrator") && (
                   <Text mt="2">
                     Vrijeme dostave: {timeToDeliver(countdowns[index])}
                   </Text>
                 )}
+
               <Text mt="2">Adresa: {o.deliveryAddress}</Text>
               <Text fontWeight="bold" color="blue.600" mt="2">
                 Stavke:
